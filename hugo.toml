@@ -17,3 +17,10 @@ paginate = 10
 [params]
 description = "Experience fashion at the speed of life. Virtual try-on and AI styling for Gen Z shoppers."
 author = "Beeyo.ai"
+googleSheetsScriptURL = "https://script.google.com/macros/s/AKfycbxivzmD_JRpzVzea2wwUsw_b6QrlJSdUu0LvdqpIUN6BD9rRQqOpyfc5lrXYvNe3zlL/exec"
+
+# Social Media
+[params.social]
+instagram = "https://instagram.com/beeyo.ai"
+twitter = "https://twitter.com/beeyoai"
+linkedin = "https://linkedin.com/company/beeyo-ai"
