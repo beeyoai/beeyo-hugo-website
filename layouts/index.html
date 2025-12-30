@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Site.Params.description }}">
+    <meta name="author" content="{{ .Site.Params.author }}">
+
+    <!-- Fonts: Space Grotesk (Headings) and Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config for Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            purple: '#6D28D9', // Electric Violet
+                            lightPurple: '#8B5CF6',
+                            dark: '#0F172A', // Deep Charcoal
+                            lime: '#CCFF00', // Gen Z Green
+                            bg: '#FAFAFA', // Off-white
+                            surface: '#FFFFFF'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D1D5DB;
+        }
+
+        /* Smooth gradient text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #6D28D9, #8B5CF6);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile mockup frame */
+        .phone-frame {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 8px solid #111;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            position: relative;
+            background: white;
+            aspect-ratio: 9/19;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 24px;
+            background: #111;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-bg text-slate-900 overflow-x-hidden selection:bg-brand-lime selection:text-brand-dark">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-panel" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 bg-brand-purple rounded-lg flex items-center justify-center text-white font-bold font-display">
+                        B
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight">Beeyo.ai</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#problem" class="text-slate-600 hover:text-brand-purple transition-colors font-medium">The
+                        Problem</a>
+                    <a href="#features" class="text-slate-600 hover:text-brand-purple transition-colors font-medium">How
+                        it Works</a>
+                    <a href="#technology"
+                        class="text-slate-600 hover:text-brand-purple transition-colors font-medium">Tech</a>
+                    <a href="#waitlist"
+                        class="bg-brand-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-purple transition-colors duration-300">
+                        Join Beta
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-800 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#problem" class="block px-3 py-3 text-slate-600 font-medium border-b border-slate-50">The
+                    Problem</a>
+                <a href="#features" class="block px-3 py-3 text-slate-600 font-medium border-b border-slate-50">How it
+                    Works</a>
+                <a href="#technology"
+                    class="block px-3 py-3 text-slate-600 font-medium border-b border-slate-50">Technology</a>
+                <a href="#waitlist"
+                    class="block mt-4 text-center bg-brand-purple text-white px-5 py-3 rounded-xl font-bold">Join Beta
+                    Waitlist</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Abstract Background Blobs -->
+        <div
+            class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-lightPurple/20 rounded-full blur-3xl animate-pulse-slow">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-brand-lime/30 rounded-full blur-3xl animate-pulse-slow">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+
+                <!-- Left Content -->
+                <div class="text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-lime/20 text-brand-dark text-sm font-semibold mb-6 border border-brand-lime/50">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-purple animate-pulse"></span>
+                        Now accepting Beta Users
+                    </div>
+
+                    <h1 class="font-display font-bold text-5xl lg:text-7xl leading-tight mb-6 text-slate-900">
+                        Don't Buy It Until You've <span class="text-gradient">Worn It.</span>
+                    </h1>
+
+                    <p class="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Delivery takes 10 minutes. Deciding takes 2 hours. We fixed the part that actually slows you
+                        down.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#waitlist"
+                            class="flex items-center justify-center gap-2 bg-brand-purple text-white px-8 py-4 rounded-full font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand-purple/30 group">
+                            Get Early Access
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <button onclick="document.getElementById('video-modal').classList.remove('hidden')"
+                            class="flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full font-semibold hover:bg-slate-50 transition-colors">
+                            <i data-lucide="play-circle" class="w-5 h-5 text-brand-purple"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
+                        <div class="flex -space-x-2">
+                            <div
+                                class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-xs font-bold">
+                                A</div>
+                            <div
+                                class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white flex items-center justify-center text-xs font-bold">
+                                S</div>
+                            <div
+                                class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white flex items-center justify-center text-xs font-bold">
+                                +</div>
+                        </div>
+                        <p>Join 100+ Gen Z shoppers in the beta</p>
+                    </div>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="relative lg:h-[600px] flex items-center justify-center">
+                    <!-- Background Circle -->
+                    <div
+                        class="absolute w-[500px] h-[500px] bg-gradient-to-tr from-brand-lime/20 to-brand-purple/20 rounded-full">
+                    </div>
+
+                    <!-- The Phone UI -->
+                    <div class="phone-frame w-64 md:w-72 lg:w-80 animate-float z-20 relative bg-white">
+                        <div class="phone-notch"></div>
+                        <!-- Mock UI Screen -->
+                        <div class="h-full flex flex-col">
+                            <!-- Header -->
+                            <div
+                                class="h-16 bg-white border-b border-slate-100 flex items-end pb-2 px-4 justify-between">
+                                <i data-lucide="menu" class="w-5 h-5 text-slate-800"></i>
+                                <span class="font-display font-bold text-lg">My Closet</span>
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-slate-800"></i>
+                            </div>
+                            <!-- Content -->
+                            <div class="flex-1 p-4 bg-slate-50 overflow-hidden relative">
+                                <!-- User Avatar + Welcome -->
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold">
+                                        AS</div>
+                                    <div>
+                                        <div class="text-xs text-slate-500">Good Morning</div>
+                                        <div class="text-sm font-bold text-slate-900">Annu Sharma</div>
+                                    </div>
+                                </div>
+
+                                <!-- Try On Card -->
+                                <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 mb-4">
+                                    <div
+                                        class="relative w-full aspect-[4/5] bg-slate-200 rounded-xl overflow-hidden group">
+                                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                            alt="Model" class="w-full h-full object-cover">
+
+                                        <!-- UI Overlay representing VTON -->
+                                        <div
+                                            class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg border border-white/50">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs font-bold text-brand-purple">Virtual Try-On
+                                                    Active</span>
+                                                <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 flex justify-between items-center">
+                                        <div class="text-sm font-bold">Oversized Blazer</div>
+                                        <div class="text-xs bg-brand-lime px-2 py-1 rounded text-brand-dark font-bold">
+                                            98% Match</div>
+                                    </div>
+                                </div>
+
+                                <!-- Floating "Old Way" Tabs (Decorative) -->
+                                <div
+                                    class="absolute -right-12 top-20 bg-white p-3 rounded-lg shadow-xl border border-red-100 w-40 transform rotate-12 z-30 opacity-80 animate-float-delayed">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                        <div class="text-xs text-slate-400">Tab 14/20</div>
+                                    </div>
+                                    <div class="h-2 bg-slate-100 rounded mb-1"></div>
+                                    <div class="h-2 bg-slate-100 rounded w-2/3"></div>
+                                    <div class="mt-2 text-[10px] text-red-500 font-bold">Does this fit??</div>
+                                </div>
+
+                                <div
+                                    class="absolute -left-8 bottom-32 bg-white p-3 rounded-lg shadow-xl border border-red-100 w-36 transform -rotate-6 z-30 opacity-80 animate-float">
+                                    <div class="text-[10px] text-slate-500 mb-1">Return Policy?</div>
+                                    <div class="h-2 bg-slate-100 rounded w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem Section (The Speed Paradox) -->
+    <section id="problem" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-3xl md:text-4xl text-slate-900 mb-4">The "15 Tabs" Problem</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    You can get a cab in 5 mins. You can get groceries in 10. <br class="hidden md:block">Why does
+                    buying a shirt take 2 hours of anxiety?
+                </p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-100 hidden md:block">
+                </div>
+
+                <!-- Comparison Grid -->
+                <div class="grid md:grid-cols-2 gap-12">
+
+                    <!-- The Old Way -->
+                    <div
+                        class="bg-slate-50 p-8 rounded-3xl border border-slate-100 relative md:text-right md:pr-12 group hover:border-red-200 transition-colors">
+                        <div
+                            class="absolute top-8 right-0 md:-right-3 w-6 h-6 bg-red-100 rounded-full border-4 border-white z-10 hidden md:block group-hover:bg-red-500 transition-colors">
+                        </div>
+                        <div
+                            class="inline-block bg-white border border-slate-200 rounded-full px-3 py-1 text-xs font-bold text-slate-500 mb-4">
+                            The Current Reality</div>
+                        <h3 class="font-display font-bold text-2xl mb-2 text-slate-900">Decision Paralysis</h3>
+                        <p class="text-slate-600 mb-6">Open 15 tabs. Google "how to style X". Call a friend. Doubt your
+                            body type. Give up.</p>
+                        <div class="flex items-center md:justify-end gap-2 text-red-500 font-bold text-xl">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
+                            2+ Hours
+                        </div>
+                    </div>
+
+                    <!-- The Beeyo Way -->
+                    <div
+                        class="bg-brand-dark text-white p-8 rounded-3xl border border-brand-dark relative md:pl-12 shadow-2xl shadow-brand-purple/20">
+                        <div
+                            class="absolute top-8 left-0 md:-left-3 w-6 h-6 bg-brand-lime rounded-full border-4 border-white z-10 hidden md:block animate-pulse">
+                        </div>
+                        <div
+                            class="inline-block bg-brand-purple/30 border border-brand-purple rounded-full px-3 py-1 text-xs font-bold text-brand-lime mb-4">
+                            The Beeyo Way</div>
+                        <h3 class="font-display font-bold text-2xl mb-2">Instant Confidence</h3>
+                        <p class="text-slate-300 mb-6">See it on your digital twin. Check if it matches your closet. Buy
+                            with certainty.</p>
+                        <div class="flex items-center gap-2 text-brand-lime font-bold text-xl">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                            10 Minutes
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-brand-bg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-brand-purple font-bold tracking-wider text-sm uppercase">The Experience Engine</span>
+                <h2 class="font-display font-bold text-3xl md:text-5xl text-slate-900 mt-2">More Than Just Shopping</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Feature 1: Digital Closet -->
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300">
+                    <div
+                        class="w-14 h-14 bg-brand-lime/20 rounded-2xl flex items-center justify-center mb-6 text-brand-dark">
+                        <i data-lucide="shirt" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Your Digital Closet</h3>
+                    <p class="text-slate-600">
+                        We digitize your existing wardrobe. Beeyo knows what you own, so we only show you what matches
+                        your current collection.
+                    </p>
+                </div>
+
+                <!-- Feature 2: AI Stylist -->
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300">
+                    <div
+                        class="w-14 h-14 bg-brand-purple/10 rounded-2xl flex items-center justify-center mb-6 text-brand-purple">
+                        <i data-lucide="sparkles" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Mix & Pair Stylist</h3>
+                    <p class="text-slate-600">
+                        "What do I wear this with?" Solved. Our AI suggests complete outfits based on occasion, skin
+                        tone, and body type.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Visualizer -->
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-lime text-xs font-bold px-3 py-1 rounded-bl-lg">Most
+                        Loved</div>
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
+                        <i data-lucide="scan-face" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Virtual Try-On</h3>
+                    <p class="text-slate-600">
+                        See exactly how it fits. Not on a model, but on <em>you</em>. Experience the item before you
+                        ever hit checkout.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech/Trust Section -->
+    <section id="technology" class="py-20 bg-brand-dark text-white relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="absolute w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-6">Powered by Deep Tech, Built for Gen Z.
+                    </h2>
+                    <p class="text-slate-400 text-lg mb-8">
+                        Our proprietary auxiliary engine combines Computer Vision and LLMs to understand fashion context
+                        better than any human stylist.
+                    </p>
+
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-6 h-6 rounded-full bg-brand-purple flex-shrink-0 mt-1 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Hyper-Personalized Context</h4>
+                                <p class="text-sm text-slate-400">We analyze skin tone, height, and style history.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-6 h-6 rounded-full bg-brand-purple flex-shrink-0 mt-1 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Zero Inventory Model</h4>
+                                <p class="text-sm text-slate-400">We connect you directly to top D2C brands.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-6 h-6 rounded-full bg-brand-purple flex-shrink-0 mt-1 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Privacy First</h4>
+                                <p class="text-sm text-slate-400">Your digital twin data is encrypted and yours alone.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800 rounded-3xl p-2 border border-slate-700">
+                    <div class="bg-slate-900 rounded-2xl p-6 lg:p-10">
+                        <!-- Code decorative element -->
+                        <div class="flex gap-2 mb-6">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="font-mono text-sm text-slate-300 space-y-2">
+                            <p><span class="text-brand-purple">const</span> <span
+                                    class="text-brand-lime">userStyle</span> = <span class="text-blue-400">await</span>
+                                beeyo.analyze({</p>
+                            <p class="pl-4">wardrobe: <span class="text-orange-300">current_closet_data</span>,</p>
+                            <p class="pl-4">occasion: <span class="text-green-300">'Date Night'</span>,</p>
+                            <p class="pl-4">bodyType: <span class="text-green-300">'Athletic'</span></p>
+                            <p>});</p>
+                            <br>
+                            <p><span class="text-slate-500">// Output: High Confidence Match</span></p>
+                            <p><span class="text-brand-purple">return</span> <span
+                                    class="text-yellow-300">recommendation.generate()</span>;</p>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-slate-800 flex justify-between items-center">
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase tracking-widest">Accuracy</div>
+                                <div class="text-2xl font-bold text-white">94%</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase tracking-widest">Return Rate Drop</div>
+                                <div class="text-2xl font-bold text-brand-lime">-40%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist CTA Section -->
+    <section id="waitlist" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="font-display font-bold text-4xl md:text-6xl text-slate-900 mb-6">Experience Fashion at the <br>
+                <span class="text-brand-purple">Speed of Life.</span>
+            </h2>
+            <p class="text-xl text-slate-600 mb-10">
+                Join the exclusive Beta. Be the first to shop without the guesswork.
+            </p>
+
+            <form class="max-w-md mx-auto relative group"
+                onsubmit="event.preventDefault(); alert('Thanks! We have added you to the waitlist.');">
+                <input type="email" placeholder="Enter your email address" required
+                    class="w-full bg-slate-50 border-2 border-slate-200 rounded-full py-4 pl-6 pr-36 focus:outline-none focus:border-brand-purple focus:ring-4 focus:ring-brand-purple/10 transition-all text-lg placeholder:text-slate-400">
+                <button type="submit"
+                    class="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-purple text-white px-6 rounded-full font-bold hover:bg-brand-dark transition-colors duration-300 flex items-center gap-2">
+                    Join Waitlist
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <p class="mt-6 text-sm text-slate-400">
+                Limited spots available for the first 120 users.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-bg border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 bg-brand-dark rounded-lg flex items-center justify-center text-white font-bold font-display">
+                        B
+                    </div>
+                    <span class="font-display font-bold text-xl">Beeyo.ai</span>
+                </div>
+
+                <div class="text-slate-500 text-sm">
+                    © 2025 Beeyo. All rights reserved.
+                </div>
+
+                <div class="flex gap-6">
+                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
+                            data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
+                            data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
+                            data-lucide="linkedin" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-xs text-slate-400">Made with ❤️ for the 370M Gen Z shoppers of India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal (Hidden by default) -->
+    <div id="video-modal"
+        class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="bg-black w-full max-w-4xl aspect-video rounded-2xl relative flex items-center justify-center border border-slate-700">
+            <button onclick="document.getElementById('video-modal').classList.add('hidden')"
+                class="absolute -top-12 right-0 text-white hover:text-brand-lime transition-colors">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <div class="text-center">
+                <i data-lucide="play" class="w-16 h-16 text-slate-600 mx-auto mb-4"></i>
+                <p class="text-slate-400">Demo Video Placeholder</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Init Icons -->
+    <script>
+        lucide.createIcons();
+
+        // Simple Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('bg-white/70', 'bg-white/95');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('bg-white/95', 'bg-white/70');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

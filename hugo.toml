@@ -1,0 +1,19 @@
+baseURL = "https://beeyoai.github.io/beeyo-hugo-website/"
+languageCode = "en-us"
+title = "Beeyo.ai | Experience Before You Shop"
+
+# Enable HTML in markdown files
+[markup.goldmark.renderer]
+unsafe = true
+
+# Build configuration
+[build]
+writeStats = false
+
+# Pagination
+paginate = 10
+
+# Params
+[params]
+description = "Experience fashion at the speed of life. Virtual try-on and AI styling for Gen Z shoppers."
+author = "Beeyo.ai"
