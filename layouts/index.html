@@ -2,118 +2,7 @@
 <html lang="{{ .Site.LanguageCode }}" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Site.Title }}</title>
-    <meta name="description" content="{{ .Site.Params.description }}">
-    <meta name="author" content="{{ .Site.Params.author }}">
-
-    <!-- Fonts: Space Grotesk (Headings) and Inter (Body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Custom Config for Brand Colors -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            purple: '#6D28D9', // Electric Violet
-                            lightPurple: '#8B5CF6',
-                            dark: '#0F172A', // Deep Charcoal
-                            lime: '#CCFF00', // Gen Z Green
-                            bg: '#FAFAFA', // Off-white
-                            surface: '#FFFFFF'
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* Custom scrollbar for webkit */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #FAFAFA;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #E5E7EB;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D1D5DB;
-        }
-
-        /* Smooth gradient text */
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, #6D28D9, #8B5CF6);
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Mobile mockup frame */
-        .phone-frame {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 8px solid #111;
-            border-radius: 2.5rem;
-            overflow: hidden;
-            position: relative;
-            background: white;
-            aspect-ratio: 9/19;
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 24px;
-            background: #111;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            z-index: 20;
-        }
-    </style>
+    {{- partial "head.html" . -}}
 </head>
 
 <body class="bg-brand-bg text-slate-900 overflow-x-hidden selection:bg-brand-lime selection:text-brand-dark">
@@ -124,10 +13,7 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
                 <div class="flex items-center gap-2">
-                    <div
-                        class="w-8 h-8 bg-brand-purple rounded-lg flex items-center justify-center text-white font-bold font-display">
-                        B
-                    </div>
+                    <img src="{{ "icon.png" | relURL }}" alt="Beeyo.ai" class="w-8 h-8 rounded-lg">
                     <span class="font-display font-bold text-xl tracking-tight">Beeyo.ai</span>
                 </div>
 
@@ -141,7 +27,7 @@
                         class="text-slate-600 hover:text-brand-purple transition-colors font-medium">Tech</a>
                     <a href="#waitlist"
                         class="bg-brand-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-purple transition-colors duration-300">
-                        Join Beta
+                        Join Waitlist
                     </a>
                 </div>
 
@@ -164,8 +50,9 @@
                 <a href="#technology"
                     class="block px-3 py-3 text-slate-600 font-medium border-b border-slate-50">Technology</a>
                 <a href="#waitlist"
-                    class="block mt-4 text-center bg-brand-purple text-white px-5 py-3 rounded-xl font-bold">Join Beta
-                    Waitlist</a>
+                    class="block mt-4 text-center bg-brand-purple text-white px-5 py-3 rounded-xl font-bold">Join
+                    Waitlist
+                </a>
             </div>
         </div>
     </nav>
@@ -207,11 +94,7 @@
                             <i data-lucide="arrow-right"
                                 class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <button onclick="document.getElementById('video-modal').classList.remove('hidden')"
-                            class="flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full font-semibold hover:bg-slate-50 transition-colors">
-                            <i data-lucide="play-circle" class="w-5 h-5 text-brand-purple"></i>
-                            Watch Demo
-                        </button>
+
                     </div>
 
                     <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
@@ -525,16 +408,22 @@
                 Join the exclusive Beta. Be the first to shop without the guesswork.
             </p>
 
-            <form class="max-w-md mx-auto relative group"
-                onsubmit="event.preventDefault(); alert('Thanks! We have added you to the waitlist.');">
-                <input type="email" placeholder="Enter your email address" required
-                    class="w-full bg-slate-50 border-2 border-slate-200 rounded-full py-4 pl-6 pr-36 focus:outline-none focus:border-brand-purple focus:ring-4 focus:ring-brand-purple/10 transition-all text-lg placeholder:text-slate-400">
-                <button type="submit"
-                    class="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-purple text-white px-6 rounded-full font-bold hover:bg-brand-dark transition-colors duration-300 flex items-center gap-2">
-                    Join Waitlist
+            <form id="waitlist-form" class="max-w-md mx-auto space-y-4">
+                <div>
+                    <input name="name" type="text" placeholder="Your name (optional)"
+                        class="w-full bg-slate-50 border-2 border-slate-200 rounded-full py-4 px-6 focus:outline-none focus:border-brand-purple focus:ring-4 focus:ring-brand-purple/10 transition-all text-lg placeholder:text-slate-400">
+                </div>
+                <div>
+                    <input name="email" type="email" placeholder="Enter your email address" required
+                        class="w-full bg-slate-50 border-2 border-slate-200 rounded-full py-4 px-6 focus:outline-none focus:border-brand-purple focus:ring-4 focus:ring-brand-purple/10 transition-all text-lg placeholder:text-slate-400">
+                </div>
+                <button type="submit" id="submit-btn"
+                    class="w-full bg-brand-purple text-white py-4 px-6 rounded-full font-bold hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2">
+                    <span>Join Waitlist</span>
                     <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
             </form>
+            <p id="form-message" class="mt-4 text-sm font-bold text-brand-purple hidden"></p>
 
             <p class="mt-6 text-sm text-slate-400">
                 Limited spots available for the first 120 users.
@@ -547,10 +436,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-2">
-                    <div
-                        class="w-8 h-8 bg-brand-dark rounded-lg flex items-center justify-center text-white font-bold font-display">
-                        B
-                    </div>
+                    <img src="{{ "icon.png" | relURL }}" alt="Beeyo.ai" class="w-8 h-8 rounded-lg">
                     <span class="font-display font-bold text-xl">Beeyo.ai</span>
                 </div>
 
@@ -559,12 +445,15 @@
                 </div>
 
                 <div class="flex gap-6">
-                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
-                            data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
-                            data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-brand-purple transition-colors"><i
-                            data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="{{ .Site.Params.social.instagram }}" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-400 hover:text-brand-purple transition-colors"><i data-lucide="instagram"
+                            class="w-5 h-5"></i></a>
+                    <a href="{{ .Site.Params.social.twitter }}" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-400 hover:text-brand-purple transition-colors"><i data-lucide="twitter"
+                            class="w-5 h-5"></i></a>
+                    <a href="{{ .Site.Params.social.linkedin }}" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-400 hover:text-brand-purple transition-colors"><i data-lucide="linkedin"
+                            class="w-5 h-5"></i></a>
                 </div>
             </div>
             <div class="text-center mt-8">
@@ -589,30 +478,7 @@
         </div>
     </div>
 
-    <!-- Init Icons -->
-    <script>
-        lucide.createIcons();
-
-        // Simple Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-                nav.classList.replace('bg-white/70', 'bg-white/95');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.replace('bg-white/95', 'bg-white/70');
-            }
-        });
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+    {{- partial "scripts.html" . -}}
 </body>
 
 </html>
