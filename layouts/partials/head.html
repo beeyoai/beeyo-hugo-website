@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="{{ " icon.png" | relURL }}">
 <link rel="apple-touch-icon" href="{{ " icon.png" | relURL }}">
 
-<!-- Fonts: Bricolage Grotesque (Headings) and Figtree (Body) -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -18,10 +18,7 @@
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- Custom Config for Brand Colors -->
+<!-- Tailwind Config -->
 <script>
     tailwind.config = {
         theme: {
@@ -32,85 +29,11 @@
                 },
                 colors: {
                     brand: {
-                        purple: '#6D28D9', // Electric Violet
-                        lightPurple: '#8B5CF6',
-                        dark: '#0F172A', // Deep Charcoal
-                        lime: '#CCFF00', // Gen Z Green
-                        bg: '#FAFAFA', // Off-white
-                        surface: '#FFFFFF'
-                    }
-                },
-                animation: {
-                    'float': 'float 6s ease-in-out infinite',
-                    'float-delayed': 'float 6s ease-in-out 3s infinite',
-                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                },
-                keyframes: {
-                    float: {
-                        '0%, 100%': { transform: 'translateY(0)' },
-                        '50%': { transform: 'translateY(-20px)' },
+                        purple: '#6D28D9',
+                        dark: '#0F172A',
                     }
                 }
             }
         }
     }
 </script>
-
-<style>
-    /* Custom scrollbar for webkit */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #FAFAFA;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #E5E7EB;
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #D1D5DB;
-    }
-
-    /* Smooth gradient text */
-    .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(to right, #6D28D9, #8B5CF6);
-    }
-
-    .glass-panel {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    /* Mobile mockup frame */
-    .phone-frame {
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        border: 8px solid #111;
-        border-radius: 2.5rem;
-        overflow: hidden;
-        position: relative;
-        background: white;
-        aspect-ratio: 9/19;
-    }
-
-    .phone-notch {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40%;
-        height: 24px;
-        background: #111;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-        z-index: 20;
-    }
-</style>

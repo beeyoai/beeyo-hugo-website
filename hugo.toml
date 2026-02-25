@@ -1,6 +1,6 @@
 baseURL = "https://beeyo.ai/"
 languageCode = "en-us"
-title = "Beeyo.ai | Experience Before You Shop"
+title = "Beeyo.ai | AI for Fashion Design"
 
 # Enable HTML in markdown files
 [markup.goldmark.renderer]
@@ -15,12 +15,6 @@ paginate = 10
 
 # Params
 [params]
-description = "Experience fashion at the speed of life. Virtual try-on and AI styling for Gen Z shoppers."
+description = "AI-powered design tools for fashion brands. Create sketches, 3D renders, and videos in minutes, not months."
 author = "Beeyo.ai"
-googleSheetsScriptURL = "https://script.google.com/macros/s/AKfycbxivzmD_JRpzVzea2wwUsw_b6QrlJSdUu0LvdqpIUN6BD9rRQqOpyfc5lrXYvNe3zlL/exec"
-
-# Social Media
-[params.social]
-instagram = "https://instagram.com/beeyo.ai"
-twitter = "https://twitter.com/beeyoai"
-linkedin = "https://linkedin.com/company/beeyo-ai"
+contactEmail = "founders@beeyo.ai"
