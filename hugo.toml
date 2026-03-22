@@ -1,6 +1,6 @@
-baseURL = "https://beeyo.ai/"
+baseURL = "https://hemline.ai/"
 languageCode = "en-us"
-title = "Beeyo.ai | AI for Fashion Design"
+title = "Hemline.ai | AI for Fashion Design"
 
 # Enable HTML in markdown files
 [markup.goldmark.renderer]
@@ -16,5 +16,6 @@ paginate = 10
 # Params
 [params]
 description = "AI-powered design tools for fashion brands. Create sketches, 3D renders, and videos in minutes, not months."
-author = "Beeyo.ai"
-contactEmail = "founders@beeyo.ai"
+author = "Hemline.ai"
+contactEmail = "founders@hemline.ai"
+signupURL = "https://hemline.beeyo.ai/sign-up"

@@ -1,6 +1,6 @@
-# Beeyo.ai Landing Page
+# Hemline.ai Landing Page
 
-A modern, responsive landing page for Beeyo.ai built with Hugo and Tailwind CSS.
+A modern, responsive landing page for Hemline.ai built with Hugo and Tailwind CSS.
 
 ## 🚀 Features
 
@@ -20,7 +20,7 @@ A modern, responsive landing page for Beeyo.ai built with Hugo and Tailwind CSS.
 ## 📁 Project Structure
 
 ```
-beeyo-hugo-website/
+hemline-hugo-website/
 ├── .github/
 │   └── workflows/
 │       └── hugo.yaml          # GitHub Actions deployment workflow
@@ -44,8 +44,8 @@ beeyo-hugo-website/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/beeyoai/beeyo-hugo-website.git
-   cd beeyo-hugo-website
+   git clone https://github.com/hemlineai/hemline-hugo-website.git
+   cd hemline-hugo-website
    ```
 
 2. **Run the development server**
@@ -76,7 +76,7 @@ The built site will be in the `public/` directory.
 2. **Update baseURL**
    Edit [hugo.toml](hugo.toml) and update the `baseURL`:
    ```toml
-   baseURL = "https://beeyoai.github.io/beeyo-hugo-website/"
+   baseURL = "https://hemlineai.github.io/hemline-hugo-website/"
    ```
 
 3. **Push to main branch**
@@ -90,7 +90,7 @@ The built site will be in the `public/` directory.
    The GitHub Actions workflow will automatically:
    - Build your Hugo site
    - Deploy to GitHub Pages
-   - Your site will be live at: `https://beeyoai.github.io/beeyo-hugo-website/`
+   - Your site will be live at: `https://hemlineai.github.io/hemline-hugo-website/`
 
 ### Manual Deployment
 
@@ -116,11 +116,11 @@ Modify [layouts/index.html](layouts/index.html) to change the page structure and
 
 ## 📝 License
 
-© 2025 Beeyo. All rights reserved.
+© 2025 Hemline. All rights reserved.
 
 ## 🤝 Contributing
 
-This is a private project. For any questions or suggestions, please contact the Beeyo.ai team.
+This is a private project. For any questions or suggestions, please contact the Hemline.ai team.
 
 ---
 
