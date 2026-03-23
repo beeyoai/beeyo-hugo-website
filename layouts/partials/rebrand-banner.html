@@ -1,0 +1,72 @@
+<!-- Rebrand Banner - Shows when utm_source=beeyo.ai -->
+<div id="rebrand-banner" style="display: none; position: relative; width: 100%; background: linear-gradient(to right, #fffbeb, #ffedd5, #fffbeb); border-bottom: 1px solid #fde68a; padding: 0.5rem 1rem;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem;">
+        <span style="color: #78350f;">
+            We have rebranded from <strong>beeyo</strong> to <strong>hemline</strong>.
+        </span>
+        <a 
+            href="/blog/from-beeyo-to-hemline"
+            style="color: #78350f; font-weight: 500; text-decoration: underline; text-underline-offset: 2px; display: inline-flex; align-items: center; gap: 0.25rem;"
+        >
+            To know more read this blog
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        </a>
+    </div>
+    <button 
+        id="rebrand-dismiss-btn"
+        type="button"
+        aria-label="Dismiss banner"
+        style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: transparent; border: none; padding: 0.25rem; color: #a16207; cursor: pointer; border-radius: 0.25rem; display: flex; align-items: center; justify-content: center;"
+        onclick="dismissRebrandBanner()"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+</div>
+
+<script>
+(function() {
+    console.log('[RebrandBanner] Checking utm_source...');
+    
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get('utm_source');
+    console.log('[RebrandBanner] URL utm_source:', utmSource);
+    
+    // Persist utm_source to sessionStorage if present
+    if (utmSource) {
+        sessionStorage.setItem('utm_source', utmSource);
+        console.log('[RebrandBanner] Stored utm_source to sessionStorage');
+    }
+    
+    // Check if dismissed
+    const isDismissed = sessionStorage.getItem('rebrand-banner-dismissed');
+    console.log('[RebrandBanner] Is dismissed:', isDismissed);
+    
+    // Check stored or URL utm_source
+    const storedUtmSource = sessionStorage.getItem('utm_source');
+    const isBeeyoSource = utmSource === 'beeyo.ai' || storedUtmSource === 'beeyo.ai';
+    console.log('[RebrandBanner] Is beeyo.ai source:', isBeeyoSource);
+    
+    if (isBeeyoSource && !isDismissed) {
+        const banner = document.getElementById('rebrand-banner');
+        if (banner) {
+            banner.style.display = 'block';
+            console.log('[RebrandBanner] Banner shown');
+        }
+    }
+})();
+
+function dismissRebrandBanner() {
+    const banner = document.getElementById('rebrand-banner');
+    if (banner) {
+        banner.style.display = 'none';
+    }
+    sessionStorage.setItem('rebrand-banner-dismissed', 'true');
+    console.log('[RebrandBanner] Banner dismissed');
+}
+</script>
