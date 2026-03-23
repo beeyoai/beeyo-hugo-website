@@ -31,32 +31,25 @@
 
 <script>
 (function() {
-    console.log('[RebrandBanner] Checking utm_source...');
-    
     const params = new URLSearchParams(window.location.search);
     const utmSource = params.get('utm_source');
-    console.log('[RebrandBanner] URL utm_source:', utmSource);
     
     // Persist utm_source to sessionStorage if present
     if (utmSource) {
         sessionStorage.setItem('utm_source', utmSource);
-        console.log('[RebrandBanner] Stored utm_source to sessionStorage');
     }
     
     // Check if dismissed
     const isDismissed = sessionStorage.getItem('rebrand-banner-dismissed');
-    console.log('[RebrandBanner] Is dismissed:', isDismissed);
     
     // Check stored or URL utm_source
     const storedUtmSource = sessionStorage.getItem('utm_source');
     const isBeeyoSource = utmSource === 'beeyo.ai' || storedUtmSource === 'beeyo.ai';
-    console.log('[RebrandBanner] Is beeyo.ai source:', isBeeyoSource);
     
     if (isBeeyoSource && !isDismissed) {
         const banner = document.getElementById('rebrand-banner');
         if (banner) {
             banner.style.display = 'block';
-            console.log('[RebrandBanner] Banner shown');
         }
     }
 })();
@@ -67,6 +60,5 @@ function dismissRebrandBanner() {
         banner.style.display = 'none';
     }
     sessionStorage.setItem('rebrand-banner-dismissed', 'true');
-    console.log('[RebrandBanner] Banner dismissed');
 }
 </script>
