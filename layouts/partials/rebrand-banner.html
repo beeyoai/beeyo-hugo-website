@@ -6,6 +6,7 @@
         </span>
         <a 
             href="/blog/from-beeyo-to-hemline"
+            id="rebrand-blog-link"
             style="color: #78350f; font-weight: 500; text-decoration: underline; text-underline-offset: 2px; display: inline-flex; align-items: center; gap: 0.25rem;"
         >
             To know more read this blog
@@ -46,23 +47,25 @@
 (function() {
     const params = new URLSearchParams(window.location.search);
     const utmSource = params.get('utm_source');
-    
-    // Persist utm_source to sessionStorage if present
-    if (utmSource) {
-        sessionStorage.setItem('utm_source', utmSource);
-    }
-    
-    // Check if dismissed
+
+    // Only show banner if utm_source=beeyo.ai is in the current URL
+    const isBeeyoSource = utmSource === 'beeyo.ai';
+
+    // Check if already dismissed in this tab
     const isDismissed = sessionStorage.getItem('rebrand-banner-dismissed');
-    
-    // Check stored or URL utm_source
-    const storedUtmSource = sessionStorage.getItem('utm_source');
-    const isBeeyoSource = utmSource === 'beeyo.ai' || storedUtmSource === 'beeyo.ai';
-    
+
     if (isBeeyoSource && !isDismissed) {
         const banner = document.getElementById('rebrand-banner');
         if (banner) {
             banner.style.display = 'block';
+
+            // Hide when blog link is clicked
+            const blogLink = document.getElementById('rebrand-blog-link');
+            if (blogLink) {
+                blogLink.addEventListener('click', function() {
+                    sessionStorage.setItem('rebrand-banner-dismissed', 'true');
+                });
+            }
         }
     }
 })();
