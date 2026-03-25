@@ -18,4 +18,4 @@ paginate = 10
 description = "AI-powered design tools for fashion brands. Create sketches, 3D renders, and videos in minutes, not months."
 author = "Hemline.ai"
 contactEmail = "founders@hemline.ai"
-signupURL = "https://hemline.beeyo.ai/sign-up"
+signupURL = "https://app.hemline.ai/sign-up"
